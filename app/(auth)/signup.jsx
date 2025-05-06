@@ -1,17 +1,26 @@
-import { View, Text, KeyboardAvoidingView, Platform, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, Text, KeyboardAvoidingView, Platform, TextInput, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
 import React, { useState } from 'react'
 import styles from '../../assets/styles/signup.styles'
 import { Ionicons } from '@expo/vector-icons';
 import COLORS from '../../constants/colors';
 import { Link } from 'expo-router';
-
+import { useAuthStore } from '../../store/authStore';
 export default function Signup() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [showPassword, setShowPassword] = useState(false); // false = hidden by default
-  const [isLoading, setIsLoading] = useState(false); // false = not loading by default
-  const handleSignUp = () => { }
+
+  const { register, isLoading } = useAuthStore();
+  const handleSignUp = async () => {
+    console.log(username, email, password);
+    const result = await register(username, email, password);
+
+    if (!result.success) {
+      Alert.alert('Error', 'Something went wrong! Please try again.');
+    }
+  }
 
   return (
     <KeyboardAvoidingView
@@ -35,6 +44,9 @@ export default function Signup() {
                   style={styles.input}
                   placeholder='Enter your username'
                   placeholderTextColor={'#999'}
+                  value={username}
+                  onChangeText={setUsername}
+                  autoCapitalize='none'
                 />
               </View>
             </View>
