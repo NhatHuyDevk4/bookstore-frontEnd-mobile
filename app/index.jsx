@@ -9,8 +9,8 @@ export default function Index() {
       <Text>
         Hello
       </Text>
-      <Link href="/signup">Signup</Link>
-      <Link href="/login">Login</Link>
+      <Link href="/(auth)/signup">Signup</Link>
+      <Link href="/(auth)">Login</Link>
     </View>
   );
 }
