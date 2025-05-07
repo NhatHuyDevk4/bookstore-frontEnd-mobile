@@ -12,7 +12,7 @@ export const useAuthStore = create((set) => ({
         set({ isLoading: true });
 
         try {
-            const response = await fetch('https://bookstore-backend-mobile.onrender.com/api/auth/register', {
+            const response = await fetch(`https://bookstore-backend-mobile.onrender.com/api/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
